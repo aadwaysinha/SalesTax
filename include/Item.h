@@ -19,13 +19,15 @@ class Item
             return this->itemName == ITEM->itemName;
         }
 
-    public:
-        Item(string, string, int, double);
-
         double customRoundTo(double, double);
 
         double calculateTax(double, double);
 
+        friend ostream & operator << (ostream &out, const Item &c); 
+
+    public:
+        Item(string, string, int, double);
+        
         double getSalesTax();
 
         double getImportTax();

@@ -39,6 +39,7 @@ void Tests::testForItem()
 
 
 
+
 //All the tests for StringPatternMatcher class are over here
 void Tests::testForStringPatternMatcher()
 {
@@ -48,6 +49,15 @@ void Tests::testForStringPatternMatcher()
     //Should return false
     assert(!this->spm->patternExists("patterDoesnt exists here"));
 }
+
+
+
+
+
+
+
+
+// void Tests::forSomething()
 
 
 

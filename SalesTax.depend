@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1562087289 source:d:\coding\salestax\main.cpp
+1562092090 source:d:\coding\salestax\main.cpp
 	<iostream>
 	"StringPatternMatcher.h"
 	"Tests.h"
+	"Item.h"
 
 1561990549 d:\coding\salestax\include\testclass.h
 	<iostream>
@@ -26,12 +27,12 @@
 
 1562075051 d:\coding\salestax\include\csvhandler.h
 
-1562087297 source:d:\coding\salestax\src\item.cpp
+1562092117 source:d:\coding\salestax\src\item.cpp
 	"Item.h"
 	"StringPatternMatcher.h"
 	<cmath>
 
-1562084779 d:\coding\salestax\include\item.h
+1562090396 d:\coding\salestax\include\item.h
 	<iostream>
 
 1562075035 source:d:\coding\salestax\src\store.cpp
@@ -53,6 +54,6 @@
 	<iostream>
 	<assert.h>
 
-1562086982 source:d:\coding\salestax\src\tests.cpp
+1562089596 source:d:\coding\salestax\src\tests.cpp
 	"Tests.h"
 

@@ -16,10 +16,9 @@ Item::Item(string itemName, string category, int frequency, double price)
 double Item::customRoundTo(double val, double roundTo = 0.05)
 {
     double roundToDivisor = 1/roundTo;
-    double res1 = (val * roundToDivisor) / roundToDivisor;
-    int res2 = res1 * 100;
-    double res3 = round((double)res2)/100.0;
-    return res3;
+    double roundedTimesX = round(val * roundToDivisor);
+    double rounded = roundedTimesX / roundToDivisor;
+    return rounded;
 }
 
 
@@ -46,10 +45,20 @@ double Item::getImportTax()
     //but just in case.
     StringPatternMatcher *spm = new StringPatternMatcher(" imported ");
 
-    //If the item has
+    //If the item has ' imported ' in its name it means that it was imported
+    //and the consumer will have to pay 5% extra tax.
     return spm->patternExists(this->itemName) ? calculateTax(this->price, 5.0) : 0;
 
 }
+
+
+//Overriding outstream operator to print an item at once
+//"<<" must be overloaded as a global function and if we want to allow them to access private data members of class, we must make them friend of that class.
+ostream & operator << (ostream &out, const Item &I)
+{
+    cout<<"ITEM: "<<I.itemName<<" belonging to "<<I.category<<" priced at "<<I.price<<endl;
+}
+
 
 
 string Item::getItemName()
@@ -72,7 +81,7 @@ double Item::getPrice()
 
 Item::~Item()
 {
-    //dtor
+    delete this;
 }
 
 Item::Item(const Item& other)
