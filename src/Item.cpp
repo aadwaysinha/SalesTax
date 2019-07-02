@@ -38,7 +38,7 @@ double Item::getSalesTax()
 
 double Item::getImportTax()
 {
-    //If the item has been imported it needs to pay an additional 5% tax
+    //If the item has been imported, consumer needs to pay an additional 5% tax
 
     //Using KMP search algorithm to check if the itemName contains the token ' imported ' anywhere (imported with padding)
     //Although KMP won't be useful for this particular word 'imported' as it doesn't have any common prefix and suffix

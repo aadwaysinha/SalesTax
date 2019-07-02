@@ -14,9 +14,14 @@ class Item
         double importTax;
 
         //Operator overloading for finding an Item in an unordered_set of Items by its name.
-        bool operator == (const Item *ITEM) const
+        bool operator == (const Item& otherItem) 
         {
-            return this->itemName == ITEM->itemName;
+            return this->itemName == otherItem.itemName;
+        }
+
+        bool operator<(const Item& otherItem) const
+        {
+            return this->itemName < otherItem.itemName ? true : false;
         }
 
         double customRoundTo(double, double);

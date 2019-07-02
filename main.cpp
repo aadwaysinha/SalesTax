@@ -12,8 +12,12 @@ int main()
     cout<<"All tests ran successfully and no bug was found.\n";
 
     //Item::Item(string itemName, string category, int frequency, double price)
-    Item *I = new Item("Harry Potter", "Books", 9, 0.876);
+    Item *I = new Item("Harry imported Potter", "Books", 9, 47.50);
     cout<<*I;
     cout<<"ST: "<<I->getSalesTax()<<endl;
     cout<<"IT: "<<I->getImportTax()<<endl;
+
+    int x;
+    cin>>x;
+    cout<<x;
 }
