@@ -1,20 +1,58 @@
 # depslib dependency file v1.0
-1561997490 source:d:\coding\makkajai\main.cpp
+1562087289 source:d:\coding\salestax\main.cpp
 	<iostream>
-	"TestClass.h"
-	"Book.h"
-	<stdio.h>
-	<stdlib.h>
+	"StringPatternMatcher.h"
+	"Tests.h"
 
-1561990549 d:\coding\makkajai\include\testclass.h
+1561990549 d:\coding\salestax\include\testclass.h
 	<iostream>
 
-1561990488 source:d:\coding\makkajai\src\testclass.cpp
+1561990488 source:d:\coding\salestax\src\testclass.cpp
 	"TestClass.h"
 
-1561997981 d:\coding\makkajai\include\book.h
+1561997981 d:\coding\salestax\include\book.h
 	<iostream>
 
-1561991138 source:d:\coding\makkajai\src\book.cpp
+1561991138 source:d:\coding\salestax\src\book.cpp
 	"Book.h"
+
+1562075062 source:d:\coding\salestax\src\cart.cpp
+	"Cart.h"
+
+1562075062 d:\coding\salestax\include\cart.h
+
+1562075051 source:d:\coding\salestax\src\csvhandler.cpp
+	"CSVHandler.h"
+
+1562075051 d:\coding\salestax\include\csvhandler.h
+
+1562087297 source:d:\coding\salestax\src\item.cpp
+	"Item.h"
+	"StringPatternMatcher.h"
+	<cmath>
+
+1562084779 d:\coding\salestax\include\item.h
+	<iostream>
+
+1562075035 source:d:\coding\salestax\src\store.cpp
+	"Store.h"
+
+1562075035 d:\coding\salestax\include\store.h
+
+1562087172 source:d:\coding\salestax\src\stringpatternmatcher.cpp
+	"StringPatternMatcher.h"
+
+1562087178 d:\coding\salestax\include\stringpatternmatcher.h
+	<iostream>
+	<vector>
+	<string>
+
+1562085832 d:\coding\salestax\include\tests.h
+	"Item.h"
+	"StringPatternMatcher.h"
+	<iostream>
+	<assert.h>
+
+1562086982 source:d:\coding\salestax\src\tests.cpp
+	"Tests.h"
 

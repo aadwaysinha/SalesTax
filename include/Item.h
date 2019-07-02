@@ -20,7 +20,22 @@ class Item
         }
 
     public:
-        Item();
+        Item(string, string, int, double);
+
+        double customRoundTo(double, double);
+
+        double calculateTax(double, double);
+
+        double getSalesTax();
+
+        double getImportTax();
+
+        string getItemName();
+
+        string getItemCategory();
+
+        double getPrice();
+
         ~Item();
         Item(const Item& other);
 };
