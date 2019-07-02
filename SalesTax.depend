@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1561997490 source:d:\coding\makkajai\main.cpp
+	<iostream>
+	"TestClass.h"
+	"Book.h"
+	<stdio.h>
+	<stdlib.h>
+
+1561990549 d:\coding\makkajai\include\testclass.h
+	<iostream>
+
+1561990488 source:d:\coding\makkajai\src\testclass.cpp
+	"TestClass.h"
+
+1561997981 d:\coding\makkajai\include\book.h
+	<iostream>
+
+1561991138 source:d:\coding\makkajai\src\book.cpp
+	"Book.h"
+
