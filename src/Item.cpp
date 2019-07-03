@@ -56,6 +56,12 @@ int Item::getCurrentFreq()
 }
 
 
+void Item::changeCategory(string cat)
+{
+    this->category = cat;
+}
+
+
 void Item::updateCurrentFreq(int newFreq)
 {
     this->freq = newFreq;

@@ -51,6 +51,8 @@ class Item
 
         void updateCurrentFreq(int);
 
+        void changeCategory(string);
+
         vector<string> tokenize(string);
 
         ~Item();

@@ -24,6 +24,8 @@ class Store
     public:
         Store(string);
 
+        unordered_map<string, unordered_map<string, Item>> getItems();
+
         void addItems();
 
         void buyStuff();

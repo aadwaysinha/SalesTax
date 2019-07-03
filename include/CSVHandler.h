@@ -13,6 +13,7 @@ class CSVHandler
 
     public:
         CSVHandler(Store &store);
+
         virtual ~CSVHandler();
 
     protected:

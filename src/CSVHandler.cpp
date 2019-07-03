@@ -1,8 +1,9 @@
 #include "CSVHandler.h"
 
-CSVHandler::CSVHandler()
+CSVHandler::CSVHandler(Store &store)
 {
-    //ctor
+    unordered_map<string, unordered_map<string, Item>> &items = store.getItems();
+    
 }
 
 CSVHandler::~CSVHandler()

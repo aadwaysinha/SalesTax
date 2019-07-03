@@ -17,7 +17,7 @@ class Cart
         double totalTax;
         queue<Item> bucket;
         vector<string> category;
-        Store *currentStore;
+        Store *store;
         Helper *H;
 
     public:

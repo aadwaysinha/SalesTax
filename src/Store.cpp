@@ -12,6 +12,12 @@ Store::Store(string storeName) : storeID(storeNumber)
 }
 
 
+unordered_map<string, unordered_map<string, Item>> Store::getItems()
+{
+    return this->items;
+}
+
+
 void Store::addItems()
 {
     cout<<"Time to add some new items in the store!"<<endl<<endl;
@@ -79,7 +85,7 @@ void Store::buyStuff()
         char choice;
         cin>>choice;
         tolower(choice);
-        if(choice == 'n')
+        if(choice == 'y')
             break;
     }
     cart->generateBill();
