@@ -1,10 +1,11 @@
 #include "CSVHandler.h"
 
-CSVHandler::CSVHandler(Store &store)
-{
 
+
+void CSVHandler::loadData(Store &store)
+{
     //Getting items from the store by reference, in this the data will be loaded from the csv
-    unordered_map<string, unordered_map<string, Item>> items = store.getItems();
+    unordered_map<string, unordered_map<string, Item>> &items = store.getItems();
 
     H = new Helper();
 
@@ -17,7 +18,6 @@ CSVHandler::CSVHandler(Store &store)
 
     if(reader.is_open())
     {
-        cout<<"found file\n";
         string itemName, category, freq, price;
 
         while(reader.good())
@@ -62,19 +62,48 @@ CSVHandler::CSVHandler(Store &store)
                 nextNextMap[currentName] = *it;
             }
         }
-        
+
         reader.close();
     }
+    
+    return;
 }
 
 
-CSVHandler::CSVHandler(Store &store, vector<Item> newItems)
+void CSVHandler::writeData(Store &store)
 {
 
+    cout<<"Here in writer\n";
+    unordered_map<string, unordered_map<string, Item>> items = store.getItems();
+
+    //Generating name of the csv file which should be opened
+    string storeID = H->toString(store.getStoreID());
+    string fileName = "store" + storeID + ".csv";
+
+    //Opening the csv file
+    ofstream writer(fileName, ios::out);
+
+    if(!writer.is_open())
+        cout<<"File not found\n";
+
+    string name, category, freq, price;
+
+    for(auto itr = items.begin(); itr!=items.end(); itr++)
+    {
+        category = itr->first;
+        for(auto itr2 = items[itr->first].begin() ; itr2 != items[itr->first].end(); itr2++)
+        {
+            name = itr2->second.getItemName();
+            category = itr2->second.getItemCategory();
+            freq = H->toString(itr2->second.getCurrentFreq());
+            price = H->toString(itr2->second.getPrice());
+            writer << name << ",";
+            writer << category << ",";
+            writer << freq << ",";
+            writer << price << "\n";
+        }
+    }
+
+    writer.close();
 }
 
-
-CSVHandler::~CSVHandler()
-{
-    //dtor
-}

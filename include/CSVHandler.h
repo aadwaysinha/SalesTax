@@ -16,18 +16,13 @@ class Store;
 class CSVHandler
 {
     private:
-        fstream readIt;
-        fstream writeIt;
         Helper *H;
 
     public:
-        CSVHandler(Store &s);   //Constructor for loader
 
-        CSVHandler(Store &s, vector<Item>);   //Constructor for writer
+        void loadData(Store &store);
 
-        virtual ~CSVHandler();
-
-    protected:
+        void writeData(Store &store);
 
 };
 

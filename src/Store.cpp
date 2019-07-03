@@ -10,8 +10,11 @@ Store::Store(string storeName)
     this->storeID = storeNumber;
     this->storeName = storeName;
     H = new Helper();
-    CSVHandler loader(*this);       //Passing this store to the loader by reference
-                                    //to fetch all the data of items from the store{id}.csv file
+    cout<<"Going to load some data\n";
+    CSVHandler *loader = new CSVHandler();
+    loader->loadData(*this);                      //Passing this store to the loader by reference
+                                                  //to fetch all the data of items from the store{id}.csv file
+    cout<<"Back in const\n";
 }
 
 
@@ -23,16 +26,15 @@ unordered_map<string, unordered_map<string, Item>>& Store::getItems()
 
 void Store::addItems()
 {
-
-    vector<Item> newItems; 
-
     cout<<"Time to add some new items in the store!"<<endl<<endl;
-    cout<<"To stop, enter 'Stop' and press enter";
+    cout<<"To stop, enter 'Stop' and press enter\n";
     while(1)
     {
+        cin.seekg(0,ios::end);
+        cin.clear();
         string category;
         cout<<"Enter category"<<endl;
-        cin>>category;
+        getline(cin, category);
 
         H->toLower(category);
 
@@ -43,7 +45,9 @@ void Store::addItems()
         double price;
         int freq;
 
-        cin>>itemName>>price>>freq;
+        getline(cin, itemName);
+
+        cin>>price>>freq;
 
         H->toLower(itemName);
 
@@ -59,6 +63,7 @@ void Store::addItems()
 
         if(currentCategory.find(itemName) != currentCategory.end())
         {
+            cout<<"ALREADY PRESENT!!\n";
             //If similar item already exists in the store, then increase its frequency by
             //adding current item's freq to it
             int oldFreq = currentCategory[itemName].getCurrentFreq();
@@ -72,14 +77,17 @@ void Store::addItems()
             unordered_map<string, Item> &current = this->items[category];
 
             current[itemName] = *newItem;
-
-            newItems.push_back(*newItem);
         }
 
         cout<<"Item has been created and will be saved once you stop entering more item\n";
     }
 
-    CSVHandler writer(*this, newItems);   //constructor method takes care of writing
+    cout<<endl<<endl;
+    this->printAllItems();
+    cout<<endl<<endl;
+
+    CSVHandler *writer = new CSVHandler();
+    writer->writeData(*this);
 }
 
 

@@ -14,5 +14,7 @@ int main()
     cout<<"All tests ran successfully and no bug was found.\n";
 
     Store *store = new Store("Aadways");
-
+    cout<<"Data fetched\n";
+    store->addItems();
+    store->printAllItems();
 }

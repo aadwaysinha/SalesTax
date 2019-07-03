@@ -70,7 +70,6 @@ void Item::changeCategory(string cat)
 void Item::updateCurrentFreq(int newFreq)
 {
     this->freq = newFreq;
-    cout<<"UPDATED FREQ FOR "<<this->itemName<<" TO "<<this->freq<<endl;
 }
 
 
@@ -101,7 +100,7 @@ vector<string> Item::tokenize(string S)
 
 Item::~Item()
 {
-    delete this;
+
 }
 
 
