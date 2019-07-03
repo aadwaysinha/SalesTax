@@ -90,6 +90,8 @@ double Helper::stod(string &s)
 
 string Helper::toString(int N)
 {
+    if(!N)
+        return "0";
     string s;
     int tempN = N;
     while(N!=0)
@@ -105,15 +107,11 @@ string Helper::toString(int N)
 
 string Helper::dtos(double D)
 {
+    if(D == 0)
+        return "0";
     setprecision(std::numeric_limits<double>::max_digits10);
     ostringstream strs;
     strs << D;
     string str = strs.str();
     return str;
-}
-
-
-Helper::~Helper()
-{
-    delete this;
 }

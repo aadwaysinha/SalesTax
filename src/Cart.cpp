@@ -1,6 +1,6 @@
 #include "Cart.h"
 
-Cart::Cart(Store &store)
+Cart::Cart(Store &store) : total(0.0), totalBill(0.0), totalTax(0.0)
 {
     this->store = &store;
     this->category = {"book", "medical", "food", "other"};
@@ -27,19 +27,24 @@ void Cart::addToCart()
 
 
     cout<<allItems.size()<<endl;
+    cout<<"Type 'quit' and press enter to stop buying\n\n";
 
     while(1)
     {
 
-        cout<<"Enter\n";
+        cin.clear();
+        cout<<"\n\n\nEnter details\n";
 
         vector<string> order;
         Item *item2bBought;
         bool toBeSkipped = false;
         string s;
+        bool firstTry = true;
+        bool itemFound = false;
 
-        while(order.size() != 3)
+        do
         {
+            !firstTry ? cout<<"Wrong format, try again\n" : firstTry = false;
             getline(cin, s);
             H->toLower(s);
             if(s == "quit")
@@ -48,45 +53,31 @@ void Cart::addToCart()
                 break;
             }
             order = item2bBought->tokenize(s);
-
-            if(order.size()!=3)
-                cout<<"Wrong format, please enter again\n";
         }
+        while(order.size()!=3);
 
         //User chose to not buy anything
         if(toBeSkipped)
             break;
 
-        cout<<"This is your order: ";
-        for(int i=0; i<3; i++)
-            cout<<"'"+order[i]+"' ";
-        cout<<endl;
-
-
-
-
         //Category of the item hasnt been classified yet
         item2bBought = new Item(order[1], "TBD", H->stoi(order[0]), H->stod(order[2]));
 
 
-        //////TESTING
-        cout<<*item2bBought<<endl;
-
         //Searching for the category which this item belongs to
         for(int i=0; i<this->category.size(); i++)
         {
-            cout<<"searching in "<<category[i]<<"...\n";
             unordered_map<string, Item> &currentCategory = allItems[category[i]];
-            cout<<"CP1\n";
-
 
             if(currentCategory.find(item2bBought->getItemName()) == currentCategory.end())
                 continue;
             else
             {
-                cout<<"CP2\n";
                 //Category of the item needs to be changed from "TBD" to category[i]
                 item2bBought->changeCategory(category[i]);
+                item2bBought->updateSalesTax();
+                item2bBought->updateSalesTax();
+                itemFound = true;
 
                 Item &item = currentCategory[item2bBought->getItemName()];
 
@@ -97,7 +88,7 @@ void Cart::addToCart()
                     cout<<"Store has got only "<<item.getCurrentFreq()<<" of these, do you want to buy them all or skip?\n";
                     string choice;
                     cout<<"Type (skip/all) and press enter\n";
-                    cin>>choice;
+                    getline(cin, choice);
 
                     H->toLower(choice);
 
@@ -106,29 +97,37 @@ void Cart::addToCart()
                         toBeSkipped = true;
                         break;
                     }
-                    else
-                    {
-
-                        //If the item is present in ample amount then we can add it to our cart,
-                        //while doing this, we also need to reduce the freq of them being bought
-                        //from the store
-
-                        item2bBought->updateCurrentFreq(item.getCurrentFreq());
-                        int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
-                        allItems[category[i]][order[1]].updateCurrentFreq(oldFreq - item2bBought->getCurrentFreq());
-                    }
+                    item2bBought->updateCurrentFreq(item.getCurrentFreq());
                 }
-
-                if(!toBeSkipped)
+                else
                 {
-                    cout<<"IN THE BUCKET!!!!!!\n";
-                    this->bucket.push(*item2bBought);
-                }
 
+                    //If the item is present in ample amount then we can add it to our cart,
+                    //while doing this, we also need to reduce the freq of them being bought
+                    //from the store
+
+                    int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
+                    this->store->updateFreq(category[i], order[1], oldFreq - item2bBought->getCurrentFreq());
+                }
                 //Now this loop needs to end because we found the category and we have bought this item
                 break;
             }
         }
+        bool itemAdded = false;
+        if(!toBeSkipped && item2bBought->getCurrentFreq())
+        {
+            itemAdded = true;
+            this->bucket.push(*item2bBought);
+        }
+        if(itemFound)
+        {
+            if(itemAdded)
+                cout<<"Your item was added to the cart\n";
+            else
+                cout<<"Your item has been skipped\n";
+        }
+        else
+            cout<<"Sorry, item not found";
     }
 }
 

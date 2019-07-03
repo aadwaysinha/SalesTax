@@ -1,20 +1,15 @@
 #include "Store.h"
 
-int Store::storeNumber = 0;
-
-Store::Store(string storeName)
+Store::Store(string storeName, int storeID)
 {
     //storeNumber is a static variable, that is it belongs to the whole class, not to any single object
     //Using storeNumber to create storeIDs on the go
-    Store::storeNumber += 1;
-    this->storeID = storeNumber;
+    this->storeID = storeID;
     this->storeName = storeName;
     H = new Helper();
-    cout<<"Going to load some data\n";
     CSVHandler *loader = new CSVHandler();
     loader->loadData(*this);                      //Passing this store to the loader by reference
                                                   //to fetch all the data of items from the store{id}.csv file
-    cout<<"Back in const\n";
 }
 
 
@@ -33,21 +28,20 @@ void Store::addItems()
         cin.seekg(0,ios::end);
         cin.clear();
         string category;
-        cout<<"Enter category"<<endl;
+        cout<<"Enter category: ";
         getline(cin, category);
 
         H->toLower(category);
 
-        if(category == "stop")
-            break;
-
-
         cout<<"\nItemName: ";
         string itemName;
+        
         double price;
         int freq;
 
         getline(cin, itemName);
+        H->toLower(itemName);
+
 
         cout<<"\nFreq: ";
         cin>>freq;
@@ -55,7 +49,6 @@ void Store::addItems()
         cin>>price;
         cout<<endl;
 
-        H->toLower(itemName);
 
         if(this->items.find(category) == this->items.end())
         {
@@ -86,6 +79,12 @@ void Store::addItems()
         }
 
         cout<<"Item has been created and will be saved once you stop entering more item\n";
+        cout<<"Wish to continue? (y/n)\n";
+        char c;
+        cin>>c;
+        c = tolower(c);
+        if(c == 'y')
+            break;
     }
 
     CSVHandler *writer = new CSVHandler();
@@ -111,8 +110,9 @@ void Store::buyStuff()
         if(choice == "y")
             break;
     }
-    cout<<"here\n";
     cart->generateBill();
+
+    //NOT saving these transactions intentionally 
 }
 
 
@@ -137,6 +137,12 @@ void Store::printAllItems()
             cout<<itr2->second<<endl;
         cout<<endl;
     }
+}
+
+
+void Store::updateFreq(string category, string itemName, int newFreq)
+{
+    this->items[category][itemName].updateCurrentFreq(newFreq);
 }
 
 

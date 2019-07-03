@@ -23,8 +23,6 @@ class Helper
 
         string dtos(double D);
 
-        ~Helper();
-
     protected:
 
     private:

@@ -12,6 +12,7 @@ using namespace std;
 class Store
 {
     private:
+
         string storeName;
         int storeID;
         Helper *H;
@@ -21,9 +22,8 @@ class Store
                                                                     //category3 --> {Map[itemName1]_{item1}, Map[itemName2]_{item2}, Map[itemName3]_{item3}...}
 
     public:
-        static int storeNumber;
 
-        Store(string);
+        Store(string, int);
 
         unordered_map<string, unordered_map<string, Item>>& getItems();
 
@@ -36,6 +36,8 @@ class Store
         int getStoreID();
 
         void printAllItems();
+
+        void updateFreq(string, string, int);
 
         ~Store();
 

@@ -14,6 +14,7 @@ class Store;
 class Cart
 {
     private:
+
         double total;
         double totalBill;
         double totalTax;
@@ -23,6 +24,7 @@ class Cart
         Helper *H;
 
     public:
+
         Cart(Store &store);
 
         queue<Item>& getBucket();

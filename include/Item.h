@@ -17,7 +17,7 @@ class Item
         double salesTax;
         double importTax;
         Helper *H;
-        
+
 
         //Operator overloading for finding an Item in an unordered_set of Items by its name.
         bool operator == (const Item& otherItem)
@@ -43,9 +43,9 @@ class Item
 
         Item(string, string, int, double);
 
-        double getSalesTax();
+        double calculateSalesTax(double);
 
-        double getImportTax();
+        double calculateImportTax(double);
 
         string getItemName();
 
@@ -56,6 +56,14 @@ class Item
         int getCurrentFreq();
 
         void updateCurrentFreq(int);
+
+        void updateSalesTax(double perc = 10.0);
+
+        void updateImportTax(double perc = 5.0);
+
+        double getSalesTax();
+
+        double getImportTax();
 
         void changeCategory(string);
 

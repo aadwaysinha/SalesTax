@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1562173933 source:d:\coding\salestax\main.cpp
+1562190359 source:d:\coding\salestax\main.cpp
 	<iostream>
 	"StringPatternMatcher.h"
 	"Tests.h"
 	"Item.h"
 	"CSVHandler.h"
 	"Store.h"
+	"Market.h"
 
 1561990549 d:\coding\salestax\include\testclass.h
 	<iostream>
@@ -19,10 +20,10 @@
 1561991138 source:d:\coding\salestax\src\book.cpp
 	"Book.h"
 
-1562177862 source:d:\coding\salestax\src\cart.cpp
+1562186597 source:d:\coding\salestax\src\cart.cpp
 	"Cart.h"
 
-1562177495 d:\coding\salestax\include\cart.h
+1562189666 d:\coding\salestax\include\cart.h
 	<iostream>
 	<queue>
 	<stack>
@@ -31,10 +32,10 @@
 	"Item.h"
 	"Helper.h"
 
-1562173703 source:d:\coding\salestax\src\csvhandler.cpp
+1562190957 source:d:\coding\salestax\src\csvhandler.cpp
 	"CSVHandler.h"
 
-1562176937 d:\coding\salestax\include\csvhandler.h
+1562188351 d:\coding\salestax\include\csvhandler.h
 	<iostream>
 	<fstream>
 	<sstream>
@@ -44,21 +45,22 @@
 	"Store.h"
 	"Helper.h"
 	"Item.h"
+	"Market.h"
 
-1562174933 source:d:\coding\salestax\src\item.cpp
+1562184604 source:d:\coding\salestax\src\item.cpp
 	"Item.h"
 
-1562172597 d:\coding\salestax\include\item.h
+1562182760 d:\coding\salestax\include\item.h
 	<iostream>
 	<vector>
 	<algorithm>
 	"StringPatternMatcher.h"
 	"Helper.h"
 
-1562176231 source:d:\coding\salestax\src\store.cpp
+1562190918 source:d:\coding\salestax\src\store.cpp
 	"Store.h"
 
-1562161571 d:\coding\salestax\include\store.h
+1562189650 d:\coding\salestax\include\store.h
 	<iostream>
 	<unordered_map>
 	<string>
@@ -84,13 +86,24 @@
 1562089596 source:d:\coding\salestax\src\tests.cpp
 	"Tests.h"
 
-1562171185 d:\coding\salestax\include\helper.h
+1562182996 d:\coding\salestax\include\helper.h
 	<iostream>
 	<cmath>
 	<algorithm>
 	<sstream>
 	<iomanip>
 
-1562171425 source:d:\coding\salestax\src\helper.cpp
+1562183004 source:d:\coding\salestax\src\helper.cpp
 	"Helper.h"
+
+1562189525 d:\coding\salestax\include\market.h
+	<iostream>
+	<sstream>
+	<fstream>
+	<map>
+	"CSVHandler.h"
+	"Helper.h"
+
+1562189730 source:d:\coding\salestax\src\market.cpp
+	"Market.h"
 

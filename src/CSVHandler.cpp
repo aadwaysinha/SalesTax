@@ -92,7 +92,7 @@ void CSVHandler::writeData(Store &store)
             name = itr2->second.getItemName();
             category = itr2->second.getItemCategory();
             freq = H->toString(itr2->second.getCurrentFreq());
-            price = H->toString(itr2->second.getPrice());
+            price = H->dtos(itr2->second.getPrice());
             writer << name << ",";
             writer << category << ",";
             writer << freq << ",";
@@ -102,3 +102,30 @@ void CSVHandler::writeData(Store &store)
     writer.close();
 }
 
+
+
+void CSVHandler::loadData(Market &market)
+{
+    H = new Helper();
+
+    ifstream reader("market.csv");
+
+    if(reader.is_open())
+    {
+        string storeID, storeName;
+
+        while(reader.good())
+        {
+            getline(reader, storeID, ',');
+            getline(reader, storeName, '\n');
+
+            if(storeName.empty())
+                break;
+
+            pair<int, string> store = {H->stoi(storeID), storeName};
+            market.storeList.insert(store);
+        }
+
+        reader.close();
+    }
+}
