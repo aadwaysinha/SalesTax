@@ -1,6 +1,9 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include<iostream>
+#include<vector>
+#include "StringPatternMatcher.h"
+#include "Helper.h"
 using namespace std;
 
 class Item
@@ -12,6 +15,7 @@ class Item
         int freq;
         double salesTax;
         double importTax;
+        Helper *H;
 
         //Operator overloading for finding an Item in an unordered_set of Items by its name.
         bool operator == (const Item& otherItem) 
@@ -28,7 +32,7 @@ class Item
 
         double calculateTax(double, double);
 
-        friend ostream & operator << (ostream &out, const Item &c); 
+        friend ostream & operator << (ostream &out, const Item &I); 
 
     public:
         Item(string, string, int, double);
@@ -43,7 +47,14 @@ class Item
 
         double getPrice();
 
+        int getCurrentFreq();
+
+        void updateCurrentFreq(int);
+
+        vector<string> tokenize(string);
+
         ~Item();
+
         Item(const Item& other);
 };
 

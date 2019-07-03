@@ -6,16 +6,9 @@ Store::Store(string storeName) : storeID(storeNumber)
     //Using storeNumber to create storeIDs on the go
     storeNumber += 1;
     this->storeName = storeName;
-
-    CSVHandler loader(*this);       //Passing this store to the loader by reference 
+    H = new Helper();
+    CSVHandler loader(*this);       //Passing this store to the loader by reference
                                     //to fetch all the data of items from the store{id}.csv file
-}
-
-
-void Store::toLower(string &s)      //In place changes in the string
-{
-    for(int i=0; i<s.length(); i++)
-        s[i] = tolower(s[i]);
 }
 
 
@@ -29,7 +22,7 @@ void Store::addItems()
         cout<<"Enter category"<<endl;
         cin>>category;
 
-        toLower(category);
+        H->toLower(category);
 
         if(category == "stop")
             break;
@@ -39,16 +32,61 @@ void Store::addItems()
 
         cin>>itemName>>price>>freq;
 
-        toLower(itemName);
+        H->toLower(itemName);
 
-        if(this->items[category].find(itemName) == this->items[category].end())
+
+        if(this->items.find(category) == this->items.end())
         {
-            Item *currentItem = new Item(itemName, category, freq, price);
-            this->items[category].insert({itemName, currentItem});
+            //category doesn't exist in the store yet, so add the category first
+            //and then add the item to it
+            this->items[category] = {};     //an empty shelf for new category    
         }
         
+        //By now, the category must exist in the store
+        unordered_map<string, Item> &currentCategory = this->items[category];            
+        
+
+        if(currentCategory.find(itemName) != currentCategory.end())
+        {
+            //If similar item already exists in the store, then increase its frequency by
+            //adding current item's freq to it
+            int oldFreq = currentCategory[itemName].getCurrentFreq();
+            currentCategory[itemName].updateCurrentFreq(oldFreq + freq);
+        }
+        else
+        {
+            //If similar item does not exist in the store, add the current item to the store
+            Item *newItem = new Item(itemName, category, freq, price);
+
+            unordered_map<string, Item> &current = this->items[category];
+
+            currentCategory.insert({itemName, *newItem});
+        }
+
+        cout<<"Item has been created and will be saved once you stop entering more item\n";
     }
 }
+
+
+
+void Store::buyStuff()
+{
+    Cart *cart = new Cart(*this);
+    while(1)
+    {
+        cart->addToCart();
+        cout<<"You sure you done? (Y/N)\n";
+        char choice;
+        cin>>choice;
+        tolower(choice);
+        if(choice == 'n')
+            break;
+    }
+    cart->generateBill();
+    delete cart;
+}
+
+
 
 //Deallocates memory from heap
 Store::~Store()

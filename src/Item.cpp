@@ -1,6 +1,5 @@
 #include "Item.h"
-#include "StringPatternMatcher.h"
-#include<cmath>
+
 
 Item::Item(string itemName, string category, int frequency, double price)
 {
@@ -9,23 +8,14 @@ Item::Item(string itemName, string category, int frequency, double price)
     this->price = price;
     this->salesTax = this->getSalesTax();
     this->importTax = this->getImportTax();
-}
-
-
-//Rounds up any value to the nearest roundTo, by default roundTo is set to 0.05 as asked in the question
-double Item::customRoundTo(double val, double roundTo = 0.05)
-{
-    double roundToDivisor = 1/roundTo;
-    double roundedTimesX = round(val * roundToDivisor);
-    double rounded = roundedTimesX / roundToDivisor;
-    return rounded;
+    this->H = new Helper();
 }
 
 
 //Returns (T*P/100) tax T on any item of price P
 double Item::calculateTax(double price, double taxPercentage)
 {
-    return customRoundTo(price * taxPercentage / 100.0);
+    return H->customRoundTo(price * taxPercentage / 100.0);
 }
 
 
@@ -60,6 +50,17 @@ ostream & operator << (ostream &out, const Item &I)
 }
 
 
+int Item::getCurrentFreq()
+{
+    return this->freq;
+}
+
+
+void Item::updateCurrentFreq(int newFreq)
+{
+    this->freq = newFreq;
+}
+
 
 string Item::getItemName()
 {
@@ -77,6 +78,13 @@ double Item::getPrice()
 {
     return this->price;
 }
+
+
+vector<string> Item::tokenize(string S)
+{
+    return {};
+}
+
 
 
 Item::~Item()
