@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1562092090 source:d:\coding\salestax\main.cpp
+1562157422 source:d:\coding\salestax\main.cpp
 	<iostream>
 	"StringPatternMatcher.h"
 	"Tests.h"
 	"Item.h"
+	"CSVHandler.h"
+	"Store.h"
 
 1561990549 d:\coding\salestax\include\testclass.h
 	<iostream>
@@ -17,28 +19,51 @@
 1561991138 source:d:\coding\salestax\src\book.cpp
 	"Book.h"
 
-1562075062 source:d:\coding\salestax\src\cart.cpp
+1562152740 source:d:\coding\salestax\src\cart.cpp
 	"Cart.h"
 
-1562075062 d:\coding\salestax\include\cart.h
+1562151512 d:\coding\salestax\include\cart.h
+	<iostream>
+	<queue>
+	<vector>
+	"Store.h"
+	"Item.h"
+	"Helper.h"
 
-1562075051 source:d:\coding\salestax\src\csvhandler.cpp
+1562161202 source:d:\coding\salestax\src\csvhandler.cpp
 	"CSVHandler.h"
 
-1562075051 d:\coding\salestax\include\csvhandler.h
-
-1562092311 source:d:\coding\salestax\src\item.cpp
-	"Item.h"
-	"StringPatternMatcher.h"
-	<cmath>
-
-1562090396 d:\coding\salestax\include\item.h
+1562157923 d:\coding\salestax\include\csvhandler.h
 	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+	<stdlib.h>
+	<unordered_map>
+	"Store.h"
+	"Helper.h"
+	"Item.h"
 
-1562075035 source:d:\coding\salestax\src\store.cpp
+1562161085 source:d:\coding\salestax\src\item.cpp
+	"Item.h"
+
+1562153111 d:\coding\salestax\include\item.h
+	<iostream>
+	<vector>
+	"StringPatternMatcher.h"
+	"Helper.h"
+
+1562158967 source:d:\coding\salestax\src\store.cpp
 	"Store.h"
 
-1562075035 d:\coding\salestax\include\store.h
+1562156358 d:\coding\salestax\include\store.h
+	<iostream>
+	<unordered_map>
+	<string>
+	"Item.h"
+	"Cart.h"
+	"CSVHandler.h"
+	"Helper.h"
 
 1562087172 source:d:\coding\salestax\src\stringpatternmatcher.cpp
 	"StringPatternMatcher.h"
@@ -56,4 +81,12 @@
 
 1562089596 source:d:\coding\salestax\src\tests.cpp
 	"Tests.h"
+
+1562156317 d:\coding\salestax\include\helper.h
+	<iostream>
+	<cmath>
+	<algorithm>
+
+1562156530 source:d:\coding\salestax\src\helper.cpp
+	"Helper.h"
 

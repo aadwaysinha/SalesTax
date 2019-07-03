@@ -18,7 +18,7 @@ void Cart::addToCart()
     //print menu by cout<<Store
 
     cout<<"To stop, type 'quit' and press enter";
-    
+
     cout<<"Make sure you order in this format: {Number of item} {item} {price}"<<endl;
     cout<<"Example: \n1 imported bottle of perfume at 27.99 \n1 bottle of perfume at 18.99"<<endl;
 
@@ -29,10 +29,10 @@ void Cart::addToCart()
         cout<<"Enter\n";
 
         vector<string> order;
-        Item *item2bBought; 
+        Item *item2bBought;
         bool toBeSkipped = false;
         string s;
-        
+
         while(order.size() != 3)
         {
             getline(cin, s);
@@ -45,16 +45,16 @@ void Cart::addToCart()
             order = item2bBought->tokenize(s);
 
             if(order.size()!=3)
-                cout<<"Wrong format, please enter again\n";             
+                cout<<"Wrong format, please enter again\n";
         }
-        
+
 
         //User chose to not buy anything
-        if(toBeSkipped) 
+        if(toBeSkipped)
             break;
 
         //Category of the item hasnt been classified yet
-        item2bBought = new Item(order[1], "TBD", stoi(order[0]), stod(order[2]));
+        item2bBought = new Item(order[1], "TBD", H->stoi(order[0]), H->stod(order[2]));
 
         //Searching for the category which this item belongs to
         for(int i=0; i<this->category.size(); i++)
@@ -66,9 +66,9 @@ void Cart::addToCart()
 
                 //Category of the item needs to be changed from "TBD" to category[i]
                 item2bBought->changeCategory(category[i]);
-                
+
                 Item &item = itr->second;
-                if(item.getCurrentFreq() < stoi(order[0]))
+                if(item.getCurrentFreq() < H->stoi(order[0]))
                 {
                     cout<<"Store has got only "<<item.getCurrentFreq()<<" of these, do you want to buy them all or skip?\n";
                     string choice;
@@ -92,7 +92,7 @@ void Cart::addToCart()
                         item2bBought->updateCurrentFreq(item.getCurrentFreq());
                         int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
                         allItems[category[i]][order[1]].updateCurrentFreq(oldFreq - item2bBought->getCurrentFreq());
-                    }                    
+                    }
                 }
 
                 if(!toBeSkipped)
@@ -102,7 +102,7 @@ void Cart::addToCart()
                 //Now this loop needs to end because we found the category and we have bought this item
                 break;
             }
-        } 
+        }
     }
 }
 

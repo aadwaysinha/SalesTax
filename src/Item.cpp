@@ -1,11 +1,16 @@
 #include "Item.h"
 
+Item::Item()
+{
+
+}
 
 Item::Item(string itemName, string category, int frequency, double price)
 {
     this->itemName = itemName;
     this->category = category;
     this->price = price;
+    this->freq = frequency;
     this->salesTax = this->getSalesTax();
     this->importTax = this->getImportTax();
     this->H = new Helper();
@@ -15,7 +20,7 @@ Item::Item(string itemName, string category, int frequency, double price)
 //Returns (T*P/100) tax T on any item of price P
 double Item::calculateTax(double price, double taxPercentage)
 {
-    return H->customRoundTo(price * taxPercentage / 100.0);
+    return H->customRoundTo(price * taxPercentage / 100.0, 0.05);
 }
 
 
@@ -46,7 +51,7 @@ double Item::getImportTax()
 //"<<" must be overloaded as a global function and if we want to allow them to access private data members of class, we must make them friend of that class.
 ostream & operator << (ostream &out, const Item &I)
 {
-    cout<<"ITEM: "<<I.itemName<<" belonging to "<<I.category<<" priced at "<<I.price<<endl;
+    cout<<"ITEM: "<<I.freq<<" "<<I.itemName<<" belonging to "<<I.category<<" priced at "<<I.price<<endl;
 }
 
 
@@ -65,6 +70,7 @@ void Item::changeCategory(string cat)
 void Item::updateCurrentFreq(int newFreq)
 {
     this->freq = newFreq;
+    cout<<"UPDATED FREQ FOR "<<this->itemName<<" TO "<<this->freq<<endl;
 }
 
 
@@ -98,8 +104,4 @@ Item::~Item()
     delete this;
 }
 
-Item::Item(const Item& other)
-{
-    //copy ctor
-}
 

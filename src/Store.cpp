@@ -1,10 +1,13 @@
 #include "Store.h"
 
-Store::Store(string storeName) : storeID(storeNumber)
+int Store::storeNumber = 0;
+
+Store::Store(string storeName)
 {
     //storeNumber is a static variable, that is it belongs to the whole class, not to any single object
     //Using storeNumber to create storeIDs on the go
-    storeNumber += 1;
+    Store::storeNumber += 1;
+    this->storeID = storeNumber;
     this->storeName = storeName;
     H = new Helper();
     CSVHandler loader(*this);       //Passing this store to the loader by reference
@@ -12,7 +15,7 @@ Store::Store(string storeName) : storeID(storeNumber)
 }
 
 
-unordered_map<string, unordered_map<string, Item>> Store::getItems()
+unordered_map<string, unordered_map<string, Item>>& Store::getItems()
 {
     return this->items;
 }
@@ -20,6 +23,9 @@ unordered_map<string, unordered_map<string, Item>> Store::getItems()
 
 void Store::addItems()
 {
+
+    vector<Item> newItems; 
+
     cout<<"Time to add some new items in the store!"<<endl<<endl;
     cout<<"To stop, enter 'Stop' and press enter";
     while(1)
@@ -34,23 +40,22 @@ void Store::addItems()
             break;
 
         string itemName;
-        int price, freq;
+        double price;
+        int freq;
 
         cin>>itemName>>price>>freq;
 
         H->toLower(itemName);
 
-
         if(this->items.find(category) == this->items.end())
         {
             //category doesn't exist in the store yet, so add the category first
             //and then add the item to it
-            this->items[category] = {};     //an empty shelf for new category    
+            this->items[category] = {};     //an empty shelf for new category
         }
-        
+
         //By now, the category must exist in the store
-        unordered_map<string, Item> &currentCategory = this->items[category];            
-        
+        unordered_map<string, Item> &currentCategory = this->items[category];
 
         if(currentCategory.find(itemName) != currentCategory.end())
         {
@@ -66,11 +71,15 @@ void Store::addItems()
 
             unordered_map<string, Item> &current = this->items[category];
 
-            currentCategory.insert({itemName, *newItem});
+            current[itemName] = *newItem;
+
+            newItems.push_back(*newItem);
         }
 
         cout<<"Item has been created and will be saved once you stop entering more item\n";
     }
+
+    CSVHandler writer(*this, newItems);   //constructor method takes care of writing
 }
 
 
@@ -92,6 +101,29 @@ void Store::buyStuff()
     delete cart;
 }
 
+
+string Store::getStoreName()
+{
+    return this->storeName;
+}
+
+
+int Store::getStoreID()
+{
+    return this->storeID;
+}
+
+
+void Store::printAllItems()
+{
+    for(auto itr = this->items.begin(); itr!=this->items.end(); itr++)
+    {
+        cout<<"Category: "<<itr->first<<endl;
+        for(auto itr2 = this->items[itr->first].begin() ; itr2 != this->items[itr->first].end(); itr2++)
+            cout<<itr2->second<<endl;
+        cout<<endl;
+    }
+}
 
 
 //Deallocates memory from heap

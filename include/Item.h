@@ -18,7 +18,7 @@ class Item
         Helper *H;
 
         //Operator overloading for finding an Item in an unordered_set of Items by its name.
-        bool operator == (const Item& otherItem) 
+        bool operator == (const Item& otherItem)
         {
             return this->itemName == otherItem.itemName;
         }
@@ -32,11 +32,13 @@ class Item
 
         double calculateTax(double, double);
 
-        friend ostream & operator << (ostream &out, const Item &I); 
+        friend ostream & operator << (ostream &out, const Item &I);
 
     public:
         Item(string, string, int, double);
-        
+
+        Item();
+
         double getSalesTax();
 
         double getImportTax();
@@ -56,8 +58,6 @@ class Item
         vector<string> tokenize(string);
 
         ~Item();
-
-        Item(const Item& other);
 };
 
 #endif // ITEM_H

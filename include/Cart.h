@@ -8,6 +8,7 @@
 #include "Helper.h"
 using namespace std;
 
+class Store;
 
 class Cart
 {
@@ -21,8 +22,8 @@ class Cart
         Helper *H;
 
     public:
-        Cart(Store &);
-        
+        Cart(Store &store);
+
         queue<Item>& getBucket();
 
         void addToCart();
