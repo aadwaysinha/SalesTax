@@ -1,11 +1,5 @@
 #include "Helper.h"
 
-Helper::Helper()
-{
-    //ctor
-}
-
-
 //Rounds up any value to the nearest roundTo, by default roundTo is set to 0.05 as asked in the question
 double Helper::customRoundTo(double val, double roundTo)
 {
@@ -24,29 +18,32 @@ void Helper::toLower(string &s)      //In place changes in the string
 }
 
 
-int stoiUtil (const char *str) {
-  unsigned char abc;
-  int ret = 0;
-  for (abc = 1; abc & 1; str++) {
-    abc  =  *str == '-' ?
-              (abc & 6 ? abc & 6 : (abc & 23) | 20)
+//Converts string to integer, STOI does not work on code blocks because of some old bug
+int stoiUtil (const char *str)
+{
+    unsigned char abc;
+    int ret = 0;
+    for (abc = 1; abc & 1; str++)
+    {
+        abc  =  *str == '-' ? (abc & 6 ? abc & 6 : (abc & 23) | 20)
             : *str == '+' ?
-              (abc & 6 ? abc & 6 : (abc & 7) | 4)
+                (abc & 6 ? abc & 6 : (abc & 7) | 4)
             : *str > 47 && *str < 58 ?
-              abc | 10
+                abc | 10
             : !(abc & 2) && (*str == ' ' || *str == '\t') ?
-               (abc & 23) | 1
+                (abc & 23) | 1
             :
-              abc & 22;
-    if (abc & 8) {
-      ret = ret * 10 + *str - 48;
+                abc & 22;
+        if (abc & 8)
+        {
+            ret = ret * 10 + *str - 48;
+        }
     }
-  }
-  return abc & 16 ? -ret : ret;
+    return abc & 16 ? -ret : ret;
 }
 
 
-int Helper::stoi(string s)
+int Helper::stoi(string &s)
 {
     char *c = new char(s.length());
     for(int i=0; i<s.length(); i++)
@@ -55,30 +52,34 @@ int Helper::stoi(string s)
 }
 
 
-double stodUtil (const char * str) {
-  unsigned char abc;
-  double ret = 0, fac = 1;
-  for (abc = 9; abc & 1; str++) {
-    abc  =  *str == '-' ?
-              (abc & 6 ? abc & 14 : (abc & 47) | 36)
+//Converts string to double, STOD does not work on code blocks because of some old bug
+double stodUtil (const char * str)
+{
+    unsigned char abc;
+    double ret = 0, fac = 1;
+    for (abc = 9; abc & 1; str++)
+    {
+        abc  =  *str == '-' ? (abc & 6 ? abc & 14 : (abc & 47) | 36)
             : *str == '+' ?
-              (abc & 6 ? abc & 14 : (abc & 15) | 4)
+                (abc & 6 ? abc & 14 : (abc & 15) | 4)
             : *str > 47 && *str < 58 ?
-              abc | 18
+                abc | 18
             : (abc & 8) && *str == '.' ?
-              (abc & 39) | 2
+                (abc & 39) | 2
             : !(abc & 2) && (*str == ' ' || *str == '\t') ?
-              (abc & 47) | 1
+                (abc & 47) | 1
             :
-              abc & 46;
-    if (abc & 16) {
-      ret = abc & 8 ? *str - 48 + ret * 10 : (*str - 48) / (fac *= 10) + ret;
+                abc & 46;
+        if (abc & 16)
+        {
+            ret = abc & 8 ? *str - 48 + ret * 10 : (*str - 48) / (fac *= 10) + ret;
+        }
     }
-  }
-  return abc & 32 ? -ret : ret;
+    return abc & 32 ? -ret : ret;
 }
 
-double Helper::stod(string s)
+
+double Helper::stod(string &s)
 {
     char *c = new char(s.length());
     for(int i=0; i<s.length(); i++)
@@ -101,7 +102,18 @@ string Helper::toString(int N)
     return s;
 }
 
+
+string Helper::dtos(double D)
+{
+    setprecision(std::numeric_limits<double>::max_digits10);
+    ostringstream strs;
+    strs << D;
+    string str = strs.str();
+    return str;
+}
+
+
 Helper::~Helper()
 {
-    //dtor
+    delete this;
 }

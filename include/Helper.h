@@ -3,12 +3,13 @@
 #include<iostream>
 #include<cmath>
 #include<algorithm>
+#include<sstream>
+#include<iomanip>
 using namespace std;
 
 class Helper
 {
     public:
-        Helper();
 
         void toLower(string &s);
 
@@ -16,9 +17,11 @@ class Helper
 
         string toString(int N);
 
-        int stoi(string);
+        int stoi(string &s);
 
-        double stod(string);
+        double stod(string &s);
+
+        string dtos(double D);
 
         ~Helper();
 

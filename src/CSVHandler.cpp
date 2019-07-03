@@ -1,7 +1,5 @@
 #include "CSVHandler.h"
 
-
-
 void CSVHandler::loadData(Store &store)
 {
     //Getting items from the store by reference, in this the data will be loaded from the csv
@@ -24,15 +22,15 @@ void CSVHandler::loadData(Store &store)
         {
             getline(reader, itemName, ',');
             getline(reader, category, ',');
-            getline(reader, price, ',');
-            getline(reader, freq, '\n');
+            getline(reader, freq, ',');
+            getline(reader, price, '\n');
 
             if(!itemName.length())
                 break;
 
             Item *it = new Item(itemName, category, H->stoi(freq), H->stod(price));
 
-            //If category doesnt exist, init it with an empty map of {itemName, item}
+            //If category does not exist, initialize it with an empty map of {itemName, item}
             string currentCategory = it->getItemCategory();
             string currentName = it->getItemName();
 
@@ -41,7 +39,7 @@ void CSVHandler::loadData(Store &store)
 
             if(items.find(currentCategory) == items.end())
             {
-                //category doesn't exist in the store yet, so add the category first
+                //category does not exist in the store yet, so add the category first
                 //and then add the item to it
                 items[category] = {};     //an empty shelf for new category
             }
@@ -65,15 +63,13 @@ void CSVHandler::loadData(Store &store)
 
         reader.close();
     }
-    
+
     return;
 }
 
 
 void CSVHandler::writeData(Store &store)
 {
-
-    cout<<"Here in writer\n";
     unordered_map<string, unordered_map<string, Item>> items = store.getItems();
 
     //Generating name of the csv file which should be opened
@@ -103,7 +99,6 @@ void CSVHandler::writeData(Store &store)
             writer << price << "\n";
         }
     }
-
     writer.close();
 }
 

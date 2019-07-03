@@ -2,6 +2,7 @@
 #define ITEM_H
 #include<iostream>
 #include<vector>
+#include<algorithm>
 #include "StringPatternMatcher.h"
 #include "Helper.h"
 using namespace std;
@@ -16,6 +17,7 @@ class Item
         double salesTax;
         double importTax;
         Helper *H;
+        
 
         //Operator overloading for finding an Item in an unordered_set of Items by its name.
         bool operator == (const Item& otherItem)
@@ -28,6 +30,8 @@ class Item
             return this->itemName < otherItem.itemName ? true : false;
         }
 
+        bool isTokenValid(vector<string>);
+
         double customRoundTo(double, double);
 
         double calculateTax(double, double);
@@ -35,9 +39,9 @@ class Item
         friend ostream & operator << (ostream &out, const Item &I);
 
     public:
-        Item(string, string, int, double);
-
         Item();
+
+        Item(string, string, int, double);
 
         double getSalesTax();
 
@@ -56,8 +60,6 @@ class Item
         void changeCategory(string);
 
         vector<string> tokenize(string);
-
-        ~Item();
 };
 
 #endif // ITEM_H

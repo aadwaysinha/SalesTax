@@ -8,13 +8,23 @@ using namespace std;
 
 int main()
 {
-
     Tests *test = new Tests();
     test->runAllTests();
     cout<<"All tests ran successfully and no bug was found.\n";
 
-    Store *store = new Store("Aadways");
+    Store *store = new Store("Aadway's");
     cout<<"Data fetched\n";
-    store->addItems();
-    store->printAllItems();
+
+
+
+    store->buyStuff();
+
 }
+
+
+
+/*
+bugs:
+    1. If price exceeds 6 digits it might lose some precision
+*/
+

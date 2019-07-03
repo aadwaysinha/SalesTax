@@ -2,6 +2,7 @@
 #define CART_H
 #include<iostream>
 #include<queue>
+#include<stack>
 #include<vector>
 #include "Store.h"
 #include "Item.h"

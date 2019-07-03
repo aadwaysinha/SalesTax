@@ -1,9 +1,11 @@
 #include "Item.h"
 
+
 Item::Item()
 {
 
 }
+
 
 Item::Item(string itemName, string category, int frequency, double price)
 {
@@ -27,6 +29,8 @@ double Item::calculateTax(double price, double taxPercentage)
 //Sales tax charged on any item of price P is its 10%
 double Item::getSalesTax()
 {
+    if(this->category == "book" || this->category == "medical" || this->category == "food")
+        return 0;
     return this->calculateTax(this->price, 10.0);
 }
 
@@ -51,7 +55,7 @@ double Item::getImportTax()
 //"<<" must be overloaded as a global function and if we want to allow them to access private data members of class, we must make them friend of that class.
 ostream & operator << (ostream &out, const Item &I)
 {
-    cout<<"ITEM: "<<I.freq<<" "<<I.itemName<<" belonging to "<<I.category<<" priced at "<<I.price<<endl;
+    cout<<"ITEM: "<<I.freq<<" "<<I.itemName<<" belonging to "<<I.category<<" priced at "<<I.price<<" ST: "<<I.salesTax<<" IT: "<<I.importTax<<endl;
 }
 
 
@@ -91,16 +95,67 @@ double Item::getPrice()
 }
 
 
+bool Item::isTokenValid(vector<string> token)
+{
+    //Must have three elements: Freq, itemName, price
+    if(token.size() != 3)
+        return false;
+
+    for(int i=0; i<3; i++)
+        if(token[i].size() == 0)
+            return false;
+
+    int freq = H->stoi(token[0]);
+    int price = H->stod(token[2]);
+
+    //Frequency must be in this range, if not then it must be an invalid token
+    if(!(freq >= 0 && freq <= INT_MAX))
+        return false;
+
+    //Price must be in this range, if not then it must be an invalid token
+    if(!(price >= 0 && price <= INT_MAX))
+        return false;
+
+    return true;
+}
+
+
 vector<string> Item::tokenize(string S)
 {
-    return {};
+    //Getting the price from the right side
+    int right = S.length()-1;
+    string price = "";
+    while(right>=0 && S[right]!=' ')
+    {
+        price += S[right];
+        right--;
+    }
+    reverse(price.begin(), price.end());
+
+    //right pointer should go as input format will always have 'at' between itemName and price
+    right -= 3;
+
+
+    //Getting the frequency from the left side
+    int left = 0;
+    string freq;
+    while(left<S.length() && S[left]!=' ')
+    {
+        freq += S[left];
+        left++;
+    }
+
+    //Now from current left to current right(both exclusive), all the characters
+    //must be a part of the item name
+    string itemName;
+    for(int i=left+1; i<=right-1; i++)
+        itemName += S[i];
+
+    vector<string> tokenized = {freq, itemName, price};
+
+    if(isTokenValid(tokenized))
+        return tokenized;
+
+    else
+        return {};
 }
-
-
-
-Item::~Item()
-{
-
-}
-
-

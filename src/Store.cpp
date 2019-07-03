@@ -41,13 +41,19 @@ void Store::addItems()
         if(category == "stop")
             break;
 
+
+        cout<<"\nItemName: ";
         string itemName;
         double price;
         int freq;
 
         getline(cin, itemName);
 
-        cin>>price>>freq;
+        cout<<"\nFreq: ";
+        cin>>freq;
+        cout<<"\nPrice: ";
+        cin>>price;
+        cout<<endl;
 
         H->toLower(itemName);
 
@@ -82,10 +88,6 @@ void Store::addItems()
         cout<<"Item has been created and will be saved once you stop entering more item\n";
     }
 
-    cout<<endl<<endl;
-    this->printAllItems();
-    cout<<endl<<endl;
-
     CSVHandler *writer = new CSVHandler();
     writer->writeData(*this);
 }
@@ -94,19 +96,23 @@ void Store::addItems()
 
 void Store::buyStuff()
 {
+    cout<<"-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-\n\n";
+
+    this->printAllItems();
+
     Cart *cart = new Cart(*this);
     while(1)
     {
         cart->addToCart();
         cout<<"You sure you done? (Y/N)\n";
-        char choice;
+        string choice;
         cin>>choice;
-        tolower(choice);
-        if(choice == 'y')
+        H->toLower(choice);
+        if(choice == "y")
             break;
     }
+    cout<<"here\n";
     cart->generateBill();
-    delete cart;
 }
 
 

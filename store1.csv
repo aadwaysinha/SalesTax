@@ -1,11 +1,13 @@
-toystory 1 cd,other,100,5
-maggi,food,10,120
-chocolate bar,food,22,1
-beyblade,other,170,100
-imported bottle of perfume,other,5,23
-music CD,other,10,12
-harry potter 3,book,40,36
-harry potter 2,book,6,18
-harry potter 1,book,10,18
-harry potter 4 ,book,20,100
-packet of headache pills,medical,100,1
+toystory 1 cd,other,5,10.23
+beyblade,other,100,17.34
+imported bottle of perfume,other,23,50.23
+maggi,food,120,5.23
+pj1,book,10,10.65
+harry potter 3,book,36,40.99
+harry potter 2,book,18,60.99
+harry potter 1,book,18,50.99
+harry potter 4 ,book,100,40.99
+packet of headache pills,medical,100,2
+book,book,10,12.49
+music CD,other,10,14.99
+chocolate bar,food,50,0.85
