@@ -8,5 +8,5 @@
 <h4>---->Build and run the project</h4>
 <h4>ELSE:</h4>
 <h4>---->Go to SalesTax\bin\Debug</h4>
-<h4>---->Make sure you have all the storeX.csv and market.csv files over there</h4>
+<h4>---->Very important, make sure you have all the storeX.csv and market.csv files over there</h4>
 <h4>---->Run Makkajai.exe</h4>
