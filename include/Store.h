@@ -3,6 +3,7 @@
 #include<iostream>
 #include<unordered_map>
 #include<string>
+#include<algorithm>
 #include "Item.h"
 #include "Cart.h"
 #include "CSVHandler.h"
@@ -13,9 +14,9 @@ class Store
 {
     private:
 
-        string storeName;
-        int storeID;
-        Helper *H;
+        string storeName;       //Name of the store
+        int storeID;            //ID of the store
+        Helper *H;  
         unordered_map<string, unordered_map<string, Item>> items;   // Maps different Maps of items to different categories
                                                                     //category1 --> {Map[itemName1]_{item1}, Map[itemName2]_{item2}, Map[itemName3]_{item3}...}
                                                                     //category2 --> {Map[itemName1]_{item1}, Map[itemName2]_{item2}, Map[itemName3]_{item3}...}
@@ -27,17 +28,17 @@ class Store
 
         unordered_map<string, unordered_map<string, Item>>& getItems();
 
-        void addItems();
+        void addItems();        //Add items to the store and save the state
 
-        void buyStuff();
+        void buyStuff();        //Buy items from the store and save the state
 
-        string getStoreName();
+        string getStoreName();  
 
         int getStoreID();
 
-        void printAllItems();
+        void printAllItems();   //Pretty print all the items in the store. {NAME, PRICE, QUANTITY}
 
-        void updateFreq(string, string, int);
+        void updateFreq(string, string, int);   //Update item list after transactions take place
 
         ~Store();
 

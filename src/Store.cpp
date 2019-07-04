@@ -19,6 +19,7 @@ unordered_map<string, unordered_map<string, Item>>& Store::getItems()
 }
 
 
+//Adds items to any stores and saves its state in the csv files
 void Store::addItems()
 {
     cout<<"Time to add some new items in the store!"<<endl<<endl;
@@ -28,14 +29,14 @@ void Store::addItems()
         cin.seekg(0,ios::end);
         cin.clear();
         string category;
-        cout<<"Enter category: ";
+        cout<<"Enter category: (or stop) ";
         getline(cin, category);
 
         H->toLower(category);
 
         cout<<"\nItemName: ";
         string itemName;
-        
+
         double price;
         int freq;
 
@@ -62,7 +63,6 @@ void Store::addItems()
 
         if(currentCategory.find(itemName) != currentCategory.end())
         {
-            cout<<"ALREADY PRESENT!!\n";
             //If similar item already exists in the store, then increase its frequency by
             //adding current item's freq to it
             int oldFreq = currentCategory[itemName].getCurrentFreq();
@@ -83,21 +83,29 @@ void Store::addItems()
         char c;
         cin>>c;
         c = tolower(c);
-        if(c == 'y')
+        if(c == 'n')
             break;
     }
 
     CSVHandler *writer = new CSVHandler();
     writer->writeData(*this);
+
+    //Once the data has been entered we need to close the file
+    //and load it once more to avoid data inconsistency
+    CSVHandler *loader = new CSVHandler();
+    loader->loadData(*this);
 }
 
 
-
+//Buy items here
+//Takes care of saving the states of items and store after all the transactions
 void Store::buyStuff()
 {
-    cout<<"-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-\n\n";
+    cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
 
     this->printAllItems();
+
+    cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
 
     Cart *cart = new Cart(*this);
     while(1)
@@ -112,7 +120,9 @@ void Store::buyStuff()
     }
     cart->generateBill();
 
-    //NOT saving these transactions intentionally 
+    //Updating the store because of recent transactions
+    CSVHandler *writer = new CSVHandler();
+    writer->writeData(*this);
 }
 
 
@@ -128,15 +138,45 @@ int Store::getStoreID()
 }
 
 
+
+//Pretty prints all the items
 void Store::printAllItems()
 {
+    //TO print all the items in a kinda OKAY looking format, we'll need some padding
+    int namePadding = 0;
+    int pricePadding = 0;
     for(auto itr = this->items.begin(); itr!=this->items.end(); itr++)
     {
-        cout<<"Category: "<<itr->first<<endl;
         for(auto itr2 = this->items[itr->first].begin() ; itr2 != this->items[itr->first].end(); itr2++)
-            cout<<itr2->second<<endl;
-        cout<<endl;
+        {
+            namePadding = max(namePadding, (int)itr2->second.getItemName().length());
+            pricePadding = max(pricePadding, (int)(H->toString(itr2->second.getPrice()).length()));
+        }
     }
+
+    namePadding += 4;
+    pricePadding += 4;
+
+    //Padding for header-> ITEM______PRICE______QUANTITY
+    string itemHeaderPad(namePadding - 4, ' ');
+    string priceHeaderPad(pricePadding - 5, ' ');
+
+    cout<<"ITEM"<<itemHeaderPad<<"PRICE"<<priceHeaderPad<<"QUANTITY\n\n";
+
+    for(auto itr = this->items.begin(); itr!=this->items.end(); itr++)
+    {
+        for(auto itr2 = this->items[itr->first].begin() ; itr2 != this->items[itr->first].end(); itr2++)
+        {
+            string name = itr2->second.getItemName();
+            string namePad(namePadding - name.length(), ' ');
+            string price = H->dtos(itr2->second.getPrice());
+            string pricePad(pricePadding - price.length(), ' ');
+            int freq = itr2->second.getCurrentFreq();
+            cout<<name<<namePad<<price<<pricePad<<freq<<endl;
+        }
+    }
+
+
 }
 
 

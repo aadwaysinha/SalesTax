@@ -51,19 +51,14 @@ StringPatternMatcher::StringPatternMatcher(string pattern)
     this->PF = PrefixFun(pattern);
 }
 
+
 bool StringPatternMatcher::patternExists(string fullString)
 {
     return KMP(fullString, this->pattern);
 }
 
+
 void StringPatternMatcher::changePattern(string newPattern)
 {
     this->PF = PrefixFun(newPattern);
 }
-
-/*
-StringPatternMatcher::~StringPatternMatcher()
-{
-
-}
-*/

@@ -79,9 +79,6 @@ void CSVHandler::writeData(Store &store)
     //Opening the csv file
     ofstream writer(fileName, ios::out);
 
-    if(!writer.is_open())
-        cout<<"File not found\n";
-
     string name, category, freq, price;
 
     for(auto itr = items.begin(); itr!=items.end(); itr++)
@@ -122,10 +119,33 @@ void CSVHandler::loadData(Market &market)
             if(storeName.empty())
                 break;
 
-            pair<int, string> store = {H->stoi(storeID), storeName};
-            market.storeList.insert(store);
+            if(H->stoi(storeID))
+                market.storeList.insert({H->stoi(storeID), storeName});
         }
 
         reader.close();
     }
+}
+
+
+//Updates market list whenever a new store is added
+void CSVHandler::writeData(Market &market)
+{
+    H = new Helper();
+    map<int, string> storeL = market.getStoreList();
+
+    //Opening the csv file
+    ofstream writer("market.csv", ios::out);
+
+    string storeID, storeName;
+
+    for(auto itr = storeL.begin(); itr!=storeL.end(); itr++)
+    {
+        storeID = H->toString(itr->first);
+        storeName = itr->second;
+        writer << storeID << ",";
+        writer << storeName << "\n";
+    }
+
+    writer.close();
 }

@@ -4,6 +4,7 @@
 #include<queue>
 #include<stack>
 #include<vector>
+#include<conio.h>
 #include "Store.h"
 #include "Item.h"
 #include "Helper.h"
@@ -15,12 +16,12 @@ class Cart
 {
     private:
 
-        double total;
-        double totalBill;
-        double totalTax;
-        queue<Item> bucket;
-        vector<string> category;
-        Store *store;
+        double total;               //sum of all the base prices in the cart
+        double totalTax;            //sum of all taxes(sales + import) for the items in the cart
+        queue<Item> bucket;         //A queue to store all the items
+        vector<string> category;    //category vector, always has 4 categories: book, medical, food, other
+                                    //needs to be maintained for searching optimization 
+        Store *store;               //store to which this cart belongs to
         Helper *H;
 
     public:
@@ -29,15 +30,11 @@ class Cart
 
         queue<Item>& getBucket();
 
-        void addToCart();
+        void addToCart();           //BUY here, main function for buying items from any store
 
-        void generateBill();
-
+        void generateBill();        //generates the bill
 
         ~Cart();
-
-    protected:
-
 };
 
 #endif // CART_H

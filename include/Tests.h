@@ -2,10 +2,15 @@
 #define TESTS_H
 #include "Item.h"
 #include "StringPatternMatcher.h"
+#include "Cart.h"
+#include "CSVHandler.h"
+#include "Store.h"
 #include<iostream>
 #include<assert.h>
 using namespace std;
 
+
+//Testing all features here
 class Tests
 {
 
@@ -15,6 +20,9 @@ class Tests
 
         void testForItem();
         void testForStringPatternMatcher();
+        void testStoreAndCart();
+        void testTax();
+
 
     public:
         Tests();

@@ -8,20 +8,27 @@
 #include "Helper.h"
 using namespace std;
 
+
+//Market stores the list of all the stores
+//It is used to maintain the states of the store
 class Market
 {
     private:
-        map<int, string> storeList;
-        Helper *H;
+        map<int, string> storeList;     //A list of all the stores
+        Helper *H;      
 
         friend class CSVHandler;
 
     public:
         void loadMarket();
 
+        void writeData();
+
         void displayMarket();
 
         string getStoreName(int);
+
+        void updateStoreList(int, string);
 
         map<int, string> getStoreList();
 

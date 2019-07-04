@@ -25,10 +25,14 @@ class CSVHandler
         //loads all the items of a store
         void loadData(Store &store);
 
-        //overriding laodData to for loading market metadata
+        //overriding lodaData for loading market metadata
         void loadData(Market &market);
 
+        //writes data to store files
         void writeData(Store &store);
+
+        //overriding writeData for market
+        void writeData(Market &market); 
 
 };
 

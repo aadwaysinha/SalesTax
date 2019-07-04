@@ -36,15 +36,21 @@
 		</Compiler>
 		<Unit filename="include/CSVHandler.h" />
 		<Unit filename="include/Cart.h" />
+		<Unit filename="include/Helper.h" />
 		<Unit filename="include/Item.h" />
+		<Unit filename="include/Market.h" />
 		<Unit filename="include/Store.h" />
 		<Unit filename="include/StringPatternMatcher.h" />
+		<Unit filename="include/Tests.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/CSVHandler.cpp" />
 		<Unit filename="src/Cart.cpp" />
+		<Unit filename="src/Helper.cpp" />
 		<Unit filename="src/Item.cpp" />
+		<Unit filename="src/Market.cpp" />
 		<Unit filename="src/Store.cpp" />
 		<Unit filename="src/StringPatternMatcher.cpp" />
+		<Unit filename="src/Tests.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

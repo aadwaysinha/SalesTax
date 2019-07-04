@@ -1,12 +1,11 @@
 #include "Item.h"
 
-
+//Do not remove this constructor
 Item::Item()
-{
-
-}
+{}
 
 
+//Parameterized constructor for creating items
 Item::Item(string itemName, string category, int frequency, double price) : salesTax(0.0), importTax(0.0)
 {
     this->itemName = itemName;
@@ -35,6 +34,7 @@ double Item::calculateSalesTax(double perc)
 }
 
 
+//Calculates import tax on any good. If it wasnt imported, returns 0 
 double Item::calculateImportTax(double perc)
 {
     //If the item has been imported, consumer needs to pay an additional 5% tax
@@ -51,16 +51,19 @@ double Item::calculateImportTax(double perc)
 }
 
 
+//Used in addToCart of Cart
 void Item::updateSalesTax(double perc)
 {
     this->salesTax = this->calculateSalesTax(perc);
 }
 
 
+//Used in addToCart of Cart
 void Item::updateImportTax(double perc)
 {
     this->salesTax = this->calculateImportTax(perc);
 }
+
 
 //Overriding outstream operator to print an item at once
 //"<<" must be overloaded as a global function and if we want to allow them to access private data members of class, we must make them friend of that class.
@@ -117,6 +120,7 @@ double Item::getImportTax()
 }
 
 
+//Used in Cart class while ordering item, checks if the input was valid or not
 bool Item::isTokenValid(vector<string> token)
 {
     //Must have three elements: Freq, itemName, price
@@ -146,6 +150,7 @@ bool Item::isTokenValid(vector<string> token)
 }
 
 
+//Helps in tokenizing the order
 vector<string> Item::tokenize(string S)
 {
     //Getting the price from the right side

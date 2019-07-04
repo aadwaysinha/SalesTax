@@ -14,13 +14,15 @@ class StringPatternMatcher
 
         vector<int> PrefixFun(string);
 
-        bool KMP(string, string);
+        bool KMP(string, string);           //KMP string matching in O(N+M)
+                                            //not particularly useful in the case of 'imported'
+                                            //but just in case.
 
 
     public:
         StringPatternMatcher(string);
 
-        bool patternExists(string);
+        bool patternExists(string);         //Tells if the pattern exists in the given string
 
         void changePattern(string);
 };
