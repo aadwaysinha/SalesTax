@@ -34,6 +34,9 @@ void Store::addItems()
 
         H->toLower(category);
 
+        if(category == "stop")
+            break;
+
         cout<<"\nItemName: ";
         string itemName;
 
@@ -102,6 +105,14 @@ void Store::addItems()
 void Store::buyStuff()
 {
     cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
+
+
+    if(this->items.empty())
+    {
+        cout<<"Ah, this store is empty right now\n\n";
+        cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
+        return;
+    }
 
     this->printAllItems();
 

@@ -34,7 +34,7 @@ double Item::calculateSalesTax(double perc)
 }
 
 
-//Calculates import tax on any good. If it wasnt imported, returns 0 
+//Calculates import tax on any good. If it wasnt imported, returns 0
 double Item::calculateImportTax(double perc)
 {
     //If the item has been imported, consumer needs to pay an additional 5% tax

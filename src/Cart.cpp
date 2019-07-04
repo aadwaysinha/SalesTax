@@ -28,7 +28,7 @@ void Cart::addToCart()
 
     unordered_map<string, unordered_map<string, Item>> &allItems = this->store->getItems();
 
-    cout<<"Type 'quit' and press enter to stop buying\n\n";
+    cout<<"Type 'quit' and press enter to stop buying\n\n(repeat if not a valid order)\n";
 
     while(1)
     {
