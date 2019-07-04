@@ -39,10 +39,18 @@ int main()
                     //Choosing store
                     cout<<endl;
                     market->displayMarket();
+                    map<int, string> stores = market->getStoreList();
                     cout<<"\n\nChoose storeID\n\n";
                     int storeID;
                     cout<<"StoreID: ";
                     cin>>storeID;
+
+                    while(stores.find(storeID) == stores.end())
+                    {
+                        cout<<"Invalid store, try again\n";
+                        cin>>storeID;
+                    }
+
                     string storeName = market->getStoreName(storeID);
 
                     //Initializing store and fetching items
