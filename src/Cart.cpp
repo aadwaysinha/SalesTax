@@ -20,21 +20,28 @@ queue<Item>& Cart::getBucket()
 void Cart::addToCart()
 {
     //print menu by cout<<Store
+    /*
+
+        Additional
 
     cout<<"\n\nTo stop, type 'quit' and press enter\n\n";
 
     cout<<"Make sure you order in this format: {Number of item} {item} at {price}\n\n"<<endl;
     cout<<"Example: \n1 imported bottle of perfume at 27.99 \n1 bottle of perfume at 18.99\n\n"<<endl;
 
-    unordered_map<string, unordered_map<string, Item>> &allItems = this->store->getItems();
 
     cout<<"Type 'quit' and press enter to stop buying\n\n(repeat if not a valid order)\n";
+
+    */
+
+    unordered_map<string, unordered_map<string, Item>> &allItems = this->store->getItems();
 
     while(1)
     {
 
         cin.clear();
-        cout<<"\n\n\nEnter details (or quit)\n";
+
+        // cout<<"\n\n\nEnter details (or quit)\n";
 
         //order will store the tokenized form of data which is entered by user while ordering
         vector<string> order;
@@ -100,6 +107,10 @@ void Cart::addToCart()
                 Item &item = currentCategory[item2bBought->getItemName()];
 
 
+                /*
+
+                        Additional feature
+
                 //If number of items ordered is greater than present in the store
                 //give the option to buy all or skip the item
                 if(item.getCurrentFreq() < H->stoi(order[0]))
@@ -125,24 +136,35 @@ void Cart::addToCart()
                 else
                 {
 
+                    */
+
                     //If the item is present in ample amount then we can add it to our cart,
                     //while doing this, we also need to reduce the freq of them being bought
                     //from the store
 
                     int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
                     this->store->updateFreq(category[i], order[1], oldFreq - item2bBought->getCurrentFreq());
+
+                    /*
                 }
+
+                */
+
                 //Now this loop needs to end because we found the category and we have bought this item
                 break;
             }
         }
 
         bool itemAdded = false;
-        if(itemFound && !toBeSkipped && item2bBought->getCurrentFreq())
+        if(itemFound && !toBeSkipped && item2bBought->getCurrentFreq() > 0)
         {
             itemAdded = true;
             this->bucket.push(*item2bBought);
         }
+
+        /*
+
+            Additional detail
 
         if(itemFound)
         {
@@ -153,6 +175,8 @@ void Cart::addToCart()
         }
         else
             cout<<"Sorry, item not found";
+
+        */
     }
 }
 
@@ -162,8 +186,11 @@ void Cart::addToCart()
 void Cart::generateBill()
 {
 
-    cout<<"=-=-=-=-=-=-=-BILL-=-=-=-=-=-=-=\n\n";
+    // cout<<"=-=-=-=-=-=-=-BILL-=-=-=-=-=-=-=\n\n";
+
+    cout<<endl;
     queue<Item> &buck = this->bucket;
+
 
     while(!buck.empty())
     {

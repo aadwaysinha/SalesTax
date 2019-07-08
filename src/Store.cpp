@@ -104,6 +104,12 @@ void Store::addItems()
 //Takes care of saving the states of items and store after all the transactions
 void Store::buyStuff()
 {
+    
+    
+    /*
+    
+        Additional feature
+
     cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
 
 
@@ -118,7 +124,17 @@ void Store::buyStuff()
 
     cout<<"-=-=-=-=-=-=-=-=-=-=- M E N U -=-=-=-=-=-=-=-=-=-=-\n\n";
 
+    */
+
+
+    //Creating a cart object
     Cart *cart = new Cart(*this);
+    
+    
+    /*
+
+        Additional feature
+
     while(1)
     {
         cart->addToCart();
@@ -129,6 +145,13 @@ void Store::buyStuff()
         if(choice == "y")
             break;
     }
+
+    */
+
+    //Calling addToCart which allows to buy stuff
+    cart->addToCart();
+
+    //Generating bill
     cart->generateBill();
 
     //Updating the store because of recent transactions
