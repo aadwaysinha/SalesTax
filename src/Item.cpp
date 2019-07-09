@@ -119,6 +119,10 @@ double Item::getImportTax()
     return this->importTax;
 }
 
+void Item::updateName(string newName)
+{
+    this->itemName = newName;
+}
 
 //Used in Cart class while ordering item, checks if the input was valid or not
 bool Item::isTokenValid(vector<string> token)

@@ -15,15 +15,22 @@ void Tests::testForItem()
     assert(this->item->getItemCategory().length() != 0);
     assert(this->item->getPrice() >= 0);
 
-    if(this->item->getPrice() > 0)
-    {
-        //There should be some check on sales tax as it MIGHT just be zero sometimes
-        //Example: if price of item is 0.2,  0.2*10/100 -> 0.02 ---rounding off to nearest 0.05---> we get 0.
-        assert(1);
+    double currentPrice = this->item->getPrice();
 
-        //check tax for imported goods here. Again, MIGHT just be zero sometimes.
-        assert(1);
-    }
+    //There should be some check on sales tax as it MIGHT just be zero sometimes
+    //Example: if price of item is 0.2,  0.2*10/100 -> 0.02 ---rounding off to nearest 0.05---> we get 0.
+    if(currentPrice >= 0.25)
+        assert(item->getSalesTax() > 0);
+
+
+    Item *zeroSalesTaxItem = new Item("testItem2", "testCategory,", 12, 0.24);
+    Item *zeroImportTaxItem = new Item("testItem3 imported", "testCategory,", 12, 0.49);
+    Item *nonZeroImportTaxItem = new Item("testItem3 imported", "testCategory,", 12, 0.5);
+
+    assert(zeroSalesTaxItem->getSalesTax() == 0);
+    assert(zeroImportTaxItem->getImportTax() == 0);
+    assert(nonZeroImportTaxItem->getImportTax() > 0);
+        
 }
 
 

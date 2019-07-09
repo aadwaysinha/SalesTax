@@ -65,6 +65,8 @@ class Item
 
         void changeCategory(string);                
 
+        void updateName(string);
+
         vector<string> tokenize(string);
 };
 

@@ -35,7 +35,6 @@ void CSVHandler::loadData(Store &store)
             string currentName = it->getItemName();
 
             H->toLower(currentCategory);
-            H->toLower(currentName);
 
             if(items.find(currentCategory) == items.end())
             {
@@ -125,27 +124,4 @@ void CSVHandler::loadData(Market &market)
 
         reader.close();
     }
-}
-
-
-//Updates market list whenever a new store is added
-void CSVHandler::writeData(Market &market)
-{
-    H = new Helper();
-    map<int, string> storeL = market.getStoreList();
-
-    //Opening the csv file
-    ofstream writer("market.csv", ios::out);
-
-    string storeID, storeName;
-
-    for(auto itr = storeL.begin(); itr!=storeL.end(); itr++)
-    {
-        storeID = H->toString(itr->first);
-        storeName = itr->second;
-        writer << storeID << ",";
-        writer << storeName << "\n";
-    }
-
-    writer.close();
 }

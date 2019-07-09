@@ -19,6 +19,7 @@ void Helper::toLower(string &s)      //In place changes in the string
 
 
 //Converts string to integer, STOI does not work on code blocks because of some old bug
+//from stackoverflow
 int stoiUtil (const char *str)
 {
     unsigned char abc;
@@ -53,6 +54,7 @@ int Helper::stoi(string &s)
 
 
 //Converts string to double, STOD does not work on code blocks because of some old bug
+//from stackoverflow
 double stodUtil (const char * str)
 {
     unsigned char abc;

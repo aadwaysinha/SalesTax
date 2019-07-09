@@ -31,9 +31,6 @@ class CSVHandler
         //writes data to store files
         void writeData(Store &store);
 
-        //overriding writeData for market
-        void writeData(Market &market); 
-
 };
 
 #endif // CSVHANDLER_H

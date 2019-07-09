@@ -9,16 +9,7 @@ void Market::loadMarket()
 }
 
 
-//writes data to market.csv
-void Market::writeData()
-{
-    CSVHandler *writer = new CSVHandler();
-
-    writer->writeData(*this);
-}
-
-
-//displays all the stores 
+//displays all the stores
 void Market::displayMarket()
 {
     cout<<"STORE ID"<<"\t"<<"STORE NAME\n";

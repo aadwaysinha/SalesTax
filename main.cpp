@@ -11,9 +11,9 @@ int main()
 {
 
     //Comment out to skip tests
-    // Tests *test = new Tests();
-    // test->runAllTests();
-    // cout<<"All tests ran successfully and no bug was found.\n\n";
+    //Tests *test = new Tests();
+    //test->runAllTests();
+    //cout<<"All tests ran successfully and no bug was found.\n\n";
 
     Market *market = new Market();
 

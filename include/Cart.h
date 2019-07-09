@@ -4,6 +4,7 @@
 #include<queue>
 #include<stack>
 #include<vector>
+#include<iomanip>
 #include<conio.h>
 #include "Store.h"
 #include "Item.h"

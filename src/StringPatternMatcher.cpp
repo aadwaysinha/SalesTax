@@ -20,6 +20,10 @@ vector<int> StringPatternMatcher::PrefixFun(string pattern)
 //KMP(Knuth-Morris-Pratt) algorithm for string searching in O(N+M)
 bool StringPatternMatcher::KMP(string fullString, string pattern)
 {
+    Helper *H = new Helper();
+    H->toLower(fullString);
+    H->toLower(pattern);
+
     int fullStringSize = fullString.size();
     int patternSize = pattern.size();
     if (patternSize == 0) return 0;

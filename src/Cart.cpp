@@ -19,20 +19,6 @@ queue<Item>& Cart::getBucket()
 //Add to cart function is called when user chooses to buy items ftom the store
 void Cart::addToCart()
 {
-    //print menu by cout<<Store
-    /*
-
-        Additional
-
-    cout<<"\n\nTo stop, type 'quit' and press enter\n\n";
-
-    cout<<"Make sure you order in this format: {Number of item} {item} at {price}\n\n"<<endl;
-    cout<<"Example: \n1 imported bottle of perfume at 27.99 \n1 bottle of perfume at 18.99\n\n"<<endl;
-
-
-    cout<<"Type 'quit' and press enter to stop buying\n\n(repeat if not a valid order)\n";
-
-    */
 
     unordered_map<string, unordered_map<string, Item>> &allItems = this->store->getItems();
 
@@ -40,8 +26,6 @@ void Cart::addToCart()
     {
 
         cin.clear();
-
-        // cout<<"\n\n\nEnter details (or quit)\n";
 
         //order will store the tokenized form of data which is entered by user while ordering
         vector<string> order;
@@ -60,7 +44,6 @@ void Cart::addToCart()
         {
 
             getline(cin, s);
-            H->toLower(s);
             if(s == "quit")
             {
                 toBeSkipped = true;
@@ -107,48 +90,9 @@ void Cart::addToCart()
                 Item &item = currentCategory[item2bBought->getItemName()];
 
 
-                /*
+                int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
+                this->store->updateFreq(category[i], order[1], oldFreq - item2bBought->getCurrentFreq());
 
-                        Additional feature
-
-                //If number of items ordered is greater than present in the store
-                //give the option to buy all or skip the item
-                if(item.getCurrentFreq() < H->stoi(order[0]))
-                {
-                    cout<<"\nStore has got only "<<item.getCurrentFreq()<<" of these, do you want to buy them all or skip?\n";
-                    string choice;
-                    cout<<"\nType (skip/all) and press enter\n";
-                    getline(cin, choice);
-
-                    H->toLower(choice);
-
-                    if(choice == "skip")
-                    {
-                        toBeSkipped = true;
-                        break;
-                    }
-
-                    //Since the user has decided to buy all the items, add them to cart
-                    //and make the quantity of this item at the store zero
-                    item2bBought->updateCurrentFreq(item.getCurrentFreq());
-                    this->store->updateFreq(category[i], order[1], 0);
-                }
-                else
-                {
-
-                    */
-
-                    //If the item is present in ample amount then we can add it to our cart,
-                    //while doing this, we also need to reduce the freq of them being bought
-                    //from the store
-
-                    int oldFreq = allItems[category[i]][order[1]].getCurrentFreq();
-                    this->store->updateFreq(category[i], order[1], oldFreq - item2bBought->getCurrentFreq());
-
-                    /*
-                }
-
-                */
 
                 //Now this loop needs to end because we found the category and we have bought this item
                 break;
@@ -162,21 +106,6 @@ void Cart::addToCart()
             this->bucket.push(*item2bBought);
         }
 
-        /*
-
-            Additional detail
-
-        if(itemFound)
-        {
-            if(itemAdded)
-                cout<<"Your item was added to the cart\n";
-            else
-                cout<<"Your item has been skipped\n";
-        }
-        else
-            cout<<"Sorry, item not found";
-
-        */
     }
 }
 
@@ -186,11 +115,9 @@ void Cart::addToCart()
 void Cart::generateBill()
 {
 
-    // cout<<"=-=-=-=-=-=-=-BILL-=-=-=-=-=-=-=\n\n";
-
     cout<<endl;
     queue<Item> &buck = this->bucket;
-
+    cout.precision(2);
 
     while(!buck.empty())
     {
@@ -198,7 +125,7 @@ void Cart::generateBill()
         double total4this = (frontItem.getCurrentFreq()*frontItem.getPrice());
         double totalTax4this = (frontItem.getSalesTax() + frontItem.getImportTax());
         totalTax4this *= frontItem.getCurrentFreq();
-        cout<<frontItem.getCurrentFreq()<<" "<<frontItem.getItemName()<<": "<<total4this+totalTax4this<<endl;
+        cout<<frontItem.getCurrentFreq()<<" "<<frontItem.getItemName()<<": "<<fixed<<total4this+totalTax4this<<endl;
 
         //updating tax and total(ie. sum of original price) for cart
         this->total += total4this;

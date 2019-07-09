@@ -28,15 +28,11 @@ class Store
 
         unordered_map<string, unordered_map<string, Item>>& getItems();
 
-        void addItems();        //Add items to the store and save the state
-
         void buyStuff();        //Buy items from the store and save the state
 
         string getStoreName();  
 
         int getStoreID();
-
-        void printAllItems();   //Pretty print all the items in the store. {NAME, PRICE, QUANTITY}
 
         void updateFreq(string, string, int);   //Update item list after transactions take place
 

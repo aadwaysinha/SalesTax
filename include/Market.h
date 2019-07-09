@@ -22,8 +22,6 @@ class Market
     public:
         void loadMarket();
 
-        void writeData();
-
         void displayMarket();
 
         string getStoreName(int);
