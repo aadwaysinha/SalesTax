@@ -3,10 +3,12 @@
 //Rounds up any value to the nearest roundTo, by default roundTo is set to 0.05 as asked in the question
 double Helper::customRoundTo(double val, double roundTo)
 {
-    double roundToDivisor = 1/roundTo;
-    double roundedTimesX = round(val * roundToDivisor);
-    double rounded = roundedTimesX / roundToDivisor;
-    return rounded;
+    //double roundToDivisor = 1/roundTo;
+    //double roundedTimesX = round(val * roundToDivisor);
+    //double rounded = roundedTimesX / roundToDivisor;
+    //return rounded;
+
+    return ceil(val/roundTo)*roundTo;
 }
 
 
