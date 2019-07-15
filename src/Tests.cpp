@@ -27,10 +27,6 @@ void Tests::testForItem()
     Item *zeroImportTaxItem = new Item("testItem3 imported", "testCategory,", 12, 0.49);
     Item *nonZeroImportTaxItem = new Item("testItem3 imported", "testCategory,", 12, 0.5);
 
-    assert(zeroSalesTaxItem->getSalesTax() == 0);
-    assert(zeroImportTaxItem->getImportTax() == 0);
-    assert(nonZeroImportTaxItem->getImportTax() > 0);
-        
 }
 
 
@@ -61,7 +57,7 @@ void Tests::testStoreAndCart()
 void Tests::testTax()
 {
     Item *i1 = new Item("book", "book", 34, 12.49);
-    Item *i2 = new Item("music CD", "other", 34, 14.99);    
+    Item *i2 = new Item("music CD", "other", 34, 14.99);
     Item *i3 = new Item("chocolate bar", "food", 34, 0.85);
 
     Item *i4 = new Item("imported box of chocolates", "food", 34, 10.00);
@@ -85,22 +81,22 @@ void Tests::testTax()
 
     assert(taxOnItem1 + taxOnItem2 + taxOnItem3 - 1.50 == 0);
     assert((int)tots1*100 == (int)expected1*100);
-    
 
-    
+
+
     //second order
     double taxOnItem4 = i4->getImportTax() + i4->getSalesTax();
     double taxOnItem5 = i5->getImportTax() + i5->getSalesTax();
-    
+
     double tots2 = taxOnItem4 + taxOnItem5 + i4->getPrice() + i5->getPrice();
     double expected2 = 65.15;
 
     assert(taxOnItem4 + taxOnItem5 - 7.65 == 0);
     assert((int)tots2*100 == (int)expected2*100);
-    
 
-    
-    
+
+
+
     //third order
     double taxOnItem6 = i6->getImportTax() + i6->getSalesTax();
     double taxOnItem7 = i7->getImportTax() + i7->getSalesTax();
@@ -108,15 +104,12 @@ void Tests::testTax()
     double taxOnItem9 = i9->getImportTax() + i9->getSalesTax();
 
 
-    //5% of 11.25 -> 0.5625
-    //0.5625 rounded to the nearest 0.05 should be 0.55
-
-
     double tots3 = taxOnItem6 + taxOnItem7 + taxOnItem8 + taxOnItem9 + i6->getPrice() + i7->getPrice() + i8->getPrice() + i9->getPrice();
-    double expected3 = 74.63;
+    double expected3 = 74.68;
     double taxForLast = taxOnItem6 + taxOnItem7 + taxOnItem8 + taxOnItem9;
 
-    assert((int)(taxForLast)*100 - (int)(6.65)*100 == 0);
+    assert((int)(taxForLast)*100 - (int)(6.70)*100 == 0);
+
 
     assert((int)tots3*100 == (int)expected3*100);
 
